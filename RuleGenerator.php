@@ -1,5 +1,8 @@
 <?php
-
+if(!isset($argv[1])) {
+	echo "Please supply an access token as an arguement. \n";
+	exit;
+}
 $accessToken = $argv[1];
 $owlURL = 'http://fowl.local';
 
@@ -14,7 +17,7 @@ print_r(setRules($routeNames, $routes->routes));
 
 function setRules($routeNames, $routes)
 {
-    $rules = array();
+    $rules = array('docs' => '*');
     foreach($routeNames as $routeName) {
         $rules = array_merge_recursive($rules, json_decode($routes->$routeName->routingJson, true));
     }
